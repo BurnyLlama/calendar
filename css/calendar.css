@@ -1,0 +1,54 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex-direction: column;
+    width: 80vw;
+    margin: 5vh 10vw;
+}
+
+#calendar > * {
+    margin: .5rem;
+}
+
+#calendar .calendar-day-name {
+    display: none;
+}
+
+#calendar > *:nth-child(7n) {
+    color: red;
+}
+
+.calendar-header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.calendar-day {
+    width: auto;
+    aspect-ratio: 4 / 3;
+    border: 1px solid black;
+}
+
+
+#calendar.week-view {
+    display: flex;
+}
+
+#calendar.week-view > *:not(.calendar-day) {
+    display: none;
+}
+
+#calendar.week-view > .calendar-day {
+    aspect-ratio: unset;
+}
+
+#calendar.week-view .calendar-day-name {
+    display: block;
+}
