@@ -19,6 +19,18 @@ body {
     color: var(--text)
 }
 
+#month {
+    text-align: center;
+    margin-top: 2rem;
+    top: 2rem;
+    position: sticky;
+    margin: .75rem;
+    background-color: var(--surface);
+    border-radius: .3rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

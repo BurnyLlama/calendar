@@ -54,3 +54,9 @@ document.querySelector("button")
         "click",
         () => calendarElement.classList.toggle("week-view")
     )
+
+setLangDataToElement(
+    "en_GB",
+    document.querySelector("#month"),
+    lang => lang.months[new Date(Date.now()).getMonth()]
+)
