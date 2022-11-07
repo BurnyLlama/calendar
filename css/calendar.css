@@ -5,6 +5,20 @@
     font-family: 'Manrope', sans-serif;
 }
 
+:root {
+    --bg: #212132;
+    --surface: #313142;
+    --text: #D0D8Ef;
+    --accent: #78A6DF;
+    --red: #FD7E98;
+    --shadow: 0 .5rem 1rem #111122AA;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text)
+}
+
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -13,8 +27,12 @@
     margin: 5vh 10vw;
 }
 
-#calendar > * {
-    margin: .5rem;
+#calendar > *:not(.calendar-offset) {
+    margin: .75rem;
+    background-color: var(--surface);
+    border-radius: .3rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
 }
 
 #calendar .calendar-day-name {
@@ -22,7 +40,7 @@
 }
 
 #calendar > *:nth-child(7n) {
-    color: red;
+    color: var(--red);
 }
 
 .calendar-header {
@@ -33,7 +51,10 @@
 .calendar-day {
     width: auto;
     aspect-ratio: 4 / 3;
-    border: 1px solid black;
+}
+
+.calendar-day-date {
+    font-size: 1.8rem;
 }
 
 
@@ -51,4 +72,16 @@
 
 #calendar.week-view .calendar-day-name {
     display: block;
+}
+
+#switch-layout-button {
+    position: fixed;
+    bottom: 5vmin;
+    right: 5vmin;
+    border-radius: 10000rem;
+    padding: 1rem;
+    border: 0 none transparent;
+    cursor: pointer;
+    background-color: var(--accent);
+    box-shadow: var(--shadow);
 }
