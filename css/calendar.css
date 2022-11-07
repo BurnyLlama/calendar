@@ -23,8 +23,8 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     flex-direction: column;
-    width: 80vw;
-    margin: 5vh 10vw;
+    width: 70vw;
+    margin: 5vh 15vw;
 }
 
 #calendar > *:not(.calendar-offset) {
@@ -54,7 +54,7 @@ body {
 }
 
 .calendar-day-date {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
 }
 
 
@@ -78,10 +78,15 @@ body {
     position: fixed;
     bottom: 5vmin;
     right: 5vmin;
-    border-radius: 10000rem;
+    border-radius: .3rem;
     padding: 1rem;
     border: 0 none transparent;
     cursor: pointer;
     background-color: var(--accent);
     box-shadow: var(--shadow);
+    transition: border-radius 0.3s;
+}
+
+#switch-layout-button:hover {
+    border-radius: 3rem;
 }
