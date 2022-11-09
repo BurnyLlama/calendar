@@ -3,9 +3,12 @@
  */
 
 /**
+ * Contains all entries that can be customised via a language file.
  * @typedef LangData
- * @property {Array<String>} days Contains a list of all days. Monday = 0.
+ * @property {Array<String>} days Contains an array of all days. Monday = 0.
+ * @property {Array<String>} months Contains an array of all months. January = 0.
  */
+
 
 let langCache = {}
 
