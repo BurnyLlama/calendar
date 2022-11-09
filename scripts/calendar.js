@@ -1,9 +1,5 @@
 import { setLangDataToElement } from "./lang.js"
 
-const DAY_OFFSET = 4
-
-const calendarElement = document.querySelector("#calendar")
-
 /**
  * Creates a calendar day element.
  * @param {number} date The date of the month, (1<=date<=31)
@@ -42,49 +38,70 @@ function createCalendarDayElement(date, offset) {
     return day
 }
 
-// Add day headers -- grabs day names from lang file.
-new Array(7)
-    .fill(0)
-    .forEach((_, dayIndex) => {
-        const day = document.createElement("div")
-        day.classList.add("calendar-header")
-        calendarElement.appendChild(day)
-        setLangDataToElement(
-            "en_GB",
-            day,
-            lang => lang.days[dayIndex]
+/**
+ * Creates a calendar at an element.
+ * @param {Element} calendarElement The element to make into a calendar.
+ */
+export function createCalendarOnElement(calendarElement) {
+    // Make sure to empty the element, so that nothing
+    // interferes with the calendar.
+    calendarElement.childNodes
+        .forEach(child => calendarElement.removeChild(child))
+
+    // Get the current date and day of month.
+    const currentDate = new Date(Date.now())
+    const currentDayOfMonth = currentDate.getUTCDate()
+
+    // Get the first day of the month via date and math magic.
+    const firstDayOfCurrentMonth = new Date(Date.now() - (currentDayOfMonth - 1) * 24 * 60 * 60 * 1000)
+
+    // Get the day offset from the first day of the month.
+    const dayOffset = firstDayOfCurrentMonth.getUTCDay() - 1
+
+    // Add day headers -- grabs day names from lang file.
+    new Array(7)
+        .fill(0)
+        .forEach((_, dayIndex) => {
+            const day = document.createElement("div")
+            day.classList.add("calendar-header")
+            calendarElement.appendChild(day)
+            setLangDataToElement(
+                "en_GB",
+                day,
+                lang => lang.days[dayIndex]
+            )
+        })
+
+    // Add offset, will depend on month.
+    // Offset is how many days the first day of the month is from a monday.
+    // TODO: Make this dynamic based on month.
+    new Array(dayOffset)
+        .fill(0)
+        .forEach(() => {
+            const offset = document.createElement("div")
+            offset.classList.add("calendar-offset")
+            calendarElement.appendChild(offset)
+        })
+
+    // Add days to calendar
+    // TODO: Currently assumes days of month to be 31, should be
+    // fixed to reflect actual number of days of the month.
+    new Array(31)
+        .fill(0)
+        .forEach((_, calendarDayIndex) => {
+            const calendarDay = createCalendarDayElement(calendarDayIndex + 1, dayOffset)
+            calendarElement.appendChild(calendarDay)
+        })
+
+    document.querySelector("button")
+        .addEventListener(
+            "click",
+            () => calendarElement.classList.toggle("week-view")
         )
-    })
 
-// Add offset, will depend on month.
-// Offset is how many days the first day of the month is from a monday.
-// TODO: Make this dynamic based on month.
-new Array(DAY_OFFSET)
-    .fill(0)
-    .forEach(() => {
-        const offset = document.createElement("div")
-        offset.classList.add("calendar-offset")
-        calendarElement.appendChild(offset)
-    })
-
-// Add days to calendar
-// TODO: Currently assumes days of month to be 31, should be
-// fixed to reflect actual number of days of the month.
-new Array(31)
-    .fill(0)
-    .forEach((_, calendarDayIndex) => {
-        const calendarDay = createCalendarDayElement(calendarDayIndex + 1, DAY_OFFSET)
-        calendarElement.appendChild(calendarDay)
-    })
-
-document.querySelector("button")
-    .addEventListener(
-        "click",
-        () => calendarElement.classList.toggle("week-view")
+    setLangDataToElement(
+        "en_GB",
+        document.querySelector("#month"),
+        lang => lang.months[new Date(Date.now()).getMonth()]
     )
-
-setLangDataToElement(
-    "en_GB",
-    document.querySelector("#month"),
-    lang => lang.months[new Date(Date.now()).getMonth()]
-)
+}
