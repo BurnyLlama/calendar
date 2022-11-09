@@ -58,6 +58,12 @@ export function createCalendarOnElement(calendarElement) {
     // Get the day offset from the first day of the month.
     const dayOffset = firstDayOfCurrentMonth.getUTCDay() - 1
 
+    // Array containing days of every month. January has index 0.
+    const daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30]
+
+    // Get amount of days this month
+    const daysThisMonth = daysPerMonth[currentDate.getUTCMonth()]
+
     // Add day headers -- grabs day names from lang file.
     new Array(7)
         .fill(0)
@@ -86,7 +92,7 @@ export function createCalendarOnElement(calendarElement) {
     // Add days to calendar
     // TODO: Currently assumes days of month to be 31, should be
     // fixed to reflect actual number of days of the month.
-    new Array(31)
+    new Array(daysThisMonth)
         .fill(0)
         .forEach((_, calendarDayIndex) => {
             const calendarDay = createCalendarDayElement(calendarDayIndex + 1, dayOffset)
