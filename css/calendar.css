@@ -16,18 +16,22 @@
 
 body {
     background-color: var(--bg);
-    color: var(--text)
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #month {
-    text-align: center;
+    width: max-content;
     margin-top: 2rem;
     top: 2rem;
     position: sticky;
+    padding: 1rem 3rem;
     margin: .75rem;
-    background-color: var(--surface);
-    border-radius: .3rem;
-    padding: 1rem;
+    border: 1px solid var(--accent);
+    background-color: var(--bg);
+    border-radius: .5rem;
     box-shadow: var(--shadow);
 }
 
@@ -94,6 +98,7 @@ body {
     padding: 1rem;
     border: 0 none transparent;
     cursor: pointer;
+    color: var(--bg);
     background-color: var(--accent);
     box-shadow: var(--shadow);
     transition: border-radius 0.3s;
