@@ -96,18 +96,18 @@ export function createCalendarOnElement(calendarElement) {
         .fill(0)
         .forEach((_, calendarDayIndex) => {
             const calendarDay = createCalendarDayElement(calendarDayIndex + 1, dayOffset)
+
+            // Make sure today's day can be styled differently.
+            if (currentDayOfMonth === calendarDayIndex + 1)
+                calendarDay.classList.add("today")
+
             calendarElement.appendChild(calendarDay)
         })
 
-    document.querySelector("button")
-        .addEventListener(
-            "click",
-            () => calendarElement.classList.toggle("week-view")
-        )
-
+    // Show current month above the calendar.
     setLangDataToElement(
         "en_GB",
         document.querySelector("#month"),
-        lang => lang.months[new Date(Date.now()).getMonth()]
+        lang => lang.months[currentDate.getUTCMonth()]
     )
 }
