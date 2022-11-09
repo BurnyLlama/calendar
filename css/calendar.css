@@ -67,12 +67,29 @@ body {
 .calendar-day {
     width: auto;
     aspect-ratio: 4 / 3;
+    cursor: pointer;
+}
+
+.calendar-day.fullscreen {
+    width: 80vw;
+    height: 80vmin;
+    aspect-ratio: unset;
+    position: fixed;
+    top: 15vmin;
+    right: 10vw;
 }
 
 .calendar-day-date {
     font-size: 1.5rem;
 }
 
+.calendar-day.fullscreen .calendar-day-name {
+    font-size: 2rem;
+}
+
+.calendar-day.fullscreen .calendar-day-date {
+    font-size: 3rem;
+}
 
 #calendar.week-view {
     display: flex;
@@ -86,8 +103,13 @@ body {
     aspect-ratio: unset;
 }
 
-#calendar.week-view .calendar-day-name {
+#calendar.week-view .calendar-day-name,
+#calendar .calendar-day.fullscreen .calendar-day-name {
     display: block;
+}
+
+#calendar .calendar-day.fullscreen {
+    padding: 2rem 3rem;
 }
 
 #switch-layout-button {

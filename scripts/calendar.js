@@ -19,6 +19,7 @@ function createCalendarDayElement(date, offset) {
     day.appendChild(dayDate)
     day.appendChild(dayName)
 
+    day.addEventListener("click", () => day.classList.toggle("fullscreen"))
     return day
 }
 
