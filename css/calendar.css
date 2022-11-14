@@ -22,6 +22,26 @@ body {
     align-items: center;
 }
 
+button {
+    font-size: .85rem;
+    padding: .25rem .5rem;
+    color: var(--bg);
+    background-color: var(--accent);
+    border: 0 none transparent;
+
+    border-radius: .3rem;
+    padding: 1rem;
+    border: 0 none transparent;
+    cursor: pointer;
+    color: var(--bg);
+    background-color: var(--accent);
+    transition: border-radius 0.3s;
+}
+
+button:hover {
+    border-radius: 1rem;
+}
+
 #month {
     width: max-content;
     margin-top: 2rem;
@@ -53,6 +73,7 @@ body {
 
 #calendar .calendar-day-name {
     display: none;
+    grid-area: name;
 }
 
 #calendar > *:nth-child(7n) {
@@ -67,32 +88,29 @@ body {
 .calendar-day {
     width: auto;
     aspect-ratio: 4 / 3;
-    cursor: pointer;
+
+    display: grid;
+    grid-template-areas: 'date btn '
+                         'info info';
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content 1fr;
+    /* place-items: end center; */
 }
 
 .calendar-day.today {
     border: 2px solid var(--accent);
 }
 
-.calendar-day.fullscreen {
-    width: 80vw;
-    height: 80vmin;
-    aspect-ratio: unset;
-    position: fixed;
-    top: 15vmin;
-    right: 10vw;
-}
-
 .calendar-day-date {
     font-size: 1.5rem;
+    grid-area: date;
 }
 
-.calendar-day.fullscreen .calendar-day-name {
-    font-size: 2rem;
-}
-
-.calendar-day.fullscreen .calendar-day-date {
-    font-size: 3rem;
+.calendar-day-fullscreen-toggle {
+    grid-area: btn;
+    padding: .25rem .5rem;
+    border: 0 none transparent;
+    margin: 0 0 auto auto;
 }
 
 #calendar.week-view {
@@ -105,6 +123,18 @@ body {
 
 #calendar.week-view > .calendar-day {
     aspect-ratio: unset;
+    grid-template-areas: 'date name info btn';
+    grid-template-columns: max-content max-content 1fr max-content;
+    grid-template-rows: 1fr;
+    place-items: center start;
+}
+
+#calendar.week-view .calendar-day-name {
+    margin: auto 1rem;
+}
+
+#calendar.week-view .calendar-day-fullscreen-toggle {
+    margin: auto 0 auto 1rem;
 }
 
 #calendar.week-view .calendar-day-name,
@@ -116,20 +146,43 @@ body {
     padding: 2rem 3rem;
 }
 
-#switch-layout-button {
+.calendar-day.fullscreen {
+    width: 80vw;
+    height: 80vmin;
+    aspect-ratio: unset;
+    position: fixed;
+    bottom: 15vmin;
+    right: 10vw;
+
+    grid-template-areas: 'date btn '
+                         'name name'
+                         'info info';
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content max-content 1fr;
+}
+
+.calendar-day-fullscreen-toggle.close {
+    background-color: var(--red);
+}
+
+.calendar-day.fullscreen .calendar-day-name {
+    font-size: 2rem;
+}
+
+.calendar-day.fullscreen .calendar-day-date {
+    font-size: 3rem;
+}
+
+#action-buttons {
     position: fixed;
     bottom: 5vmin;
     right: 5vmin;
-    border-radius: .3rem;
-    padding: 1rem;
-    border: 0 none transparent;
-    cursor: pointer;
-    color: var(--bg);
-    background-color: var(--accent);
     box-shadow: var(--shadow);
-    transition: border-radius 0.3s;
+
+    display: flex;
+    flex-direction: column;
 }
 
-#switch-layout-button:hover {
-    border-radius: 3rem;
+#action-buttons > * {
+    margin: .5rem 0;
 }

@@ -11,11 +11,15 @@ function createCalendarDayElement(date, offset) {
     const day = document.createElement("div")
     const dayDate = document.createElement("p")
     const dayName = document.createElement("p")
+    const fullscreenToggleButton = document.createElement("button")
 
     // Add the correct classes.
     day.classList.add("calendar-day")
     dayDate.classList.add("calendar-day-date")
     dayName.classList.add("calendar-day-name")
+    fullscreenToggleButton.classList.add("calendar-day-fullscreen-toggle")
+
+    fullscreenToggleButton.textContent = "•••"
 
     // Set the day name from lang file.
     dayDate.textContent = date
@@ -28,11 +32,26 @@ function createCalendarDayElement(date, offset) {
     // Append day name and day date to the day element.
     day.appendChild(dayDate)
     day.appendChild(dayName)
+    day.appendChild(fullscreenToggleButton)
 
     // Fullscreen toggle on click.
-    day.addEventListener(
+    fullscreenToggleButton.addEventListener(
         "click",
-        () => day.classList.toggle("fullscreen")
+        () => {
+            // Reset previous fullscreen days.
+            document.querySelectorAll(".calendar-day.fullscreen")
+                .forEach(
+                    element => {
+                        if (element !== day)
+                            element.classList.remove("fullscreen")
+                    }
+                )
+
+            fullscreenToggleButton.classList.toggle("close")
+
+            // Set current day to fullscreen.
+            day.classList.toggle("fullscreen")
+        }
     )
 
     return day
