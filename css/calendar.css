@@ -42,17 +42,26 @@ button:hover {
     border-radius: 1rem;
 }
 
-#month {
-    width: max-content;
-    margin-top: 2rem;
+header {
+    display: flex;
+    align-items: center;
     top: 2rem;
     position: sticky;
+}
+
+header > * {
+    width: max-content;
     padding: 1rem 3rem;
     margin: .75rem;
     border: 1px solid var(--accent);
     background-color: var(--bg);
     border-radius: .5rem;
     box-shadow: var(--shadow);
+}
+
+header > button {
+    color: var(--accent);
+    padding: .75rem 1.5rem;
 }
 
 #calendar {
@@ -94,10 +103,10 @@ button:hover {
                          'info info';
     grid-template-columns: max-content 1fr;
     grid-template-rows: max-content 1fr;
-    /* place-items: end center; */
 }
 
 .calendar-day.today {
+    padding: calc(1rem - 2px);
     border: 2px solid var(--accent);
 }
 

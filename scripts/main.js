@@ -4,7 +4,7 @@ import { setup } from "./settings.js"
 const calendarElement = document.querySelector("#calendar")
 const settingsElement = document.querySelector("#settings")
 
-createCalendarOnElement(calendarElement)
+createCalendarOnElement(calendarElement, new Date())
 
 document.querySelector("#switch-layout-button")
     .addEventListener(
@@ -22,6 +22,25 @@ document.querySelectorAll("#settings-button, #close-settings")
             "click",
             () => settingsElement.classList.toggle("hidden")
         )
+    )
+
+let monthOffset = 0
+document.querySelector("#next-month")
+    .addEventListener(
+        "click",
+        () => {
+            monthOffset -= 1
+            createCalendarOnElement(calendarElement, new Date(Date.now() + monthOffset * 30 * 24 * 60 * 60 * 1000))
+        }
+    )
+
+document.querySelector("#prev-month")
+    .addEventListener(
+        "click",
+        () => {
+            monthOffset += 1
+            createCalendarOnElement(calendarElement, new Date(Date.now() + monthOffset * 30 * 24 * 60 * 60 * 1000))
+        }
     )
 
 setup()

@@ -1,6 +1,12 @@
 import { setLangDataToElement } from "./lang.js"
 
 /**
+ * Array containing days of every month. January has index 0.
+ */
+const daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+
+/**
  * Creates a calendar day element.
  * @param {number} date The date of the month, (1<=date<=31)
  * @param {number} offset The number of days the first day of the month is from a monday.
@@ -8,7 +14,7 @@ import { setLangDataToElement } from "./lang.js"
  */
 function createCalendarDayElement(date, offset) {
     // Create necessary elements.
-    const day = document.createElement("div")
+    const day     = document.createElement("div")
     const dayDate = document.createElement("p")
     const dayName = document.createElement("p")
     const fullscreenToggleButton = document.createElement("button")
@@ -61,27 +67,23 @@ function createCalendarDayElement(date, offset) {
  * Creates a calendar at an element.
  * @param {Element} calendarElement The element to make into a calendar.
  */
-export function createCalendarOnElement(calendarElement) {
+export function createCalendarOnElement(calendarElement, originDate) {
     // Make sure to empty the element, so that nothing
     // interferes with the calendar.
-    calendarElement.childNodes
-        .forEach(child => calendarElement.removeChild(child))
+    calendarElement.replaceChildren("")
+        // .forEach(child => calendarElement.removeChild(child))
 
     // Get the current date and day of month.
-    const currentDate = new Date(Date.now())
-    const currentDayOfMonth = currentDate.getUTCDate()
+    const currentDayOfMonth = originDate.getUTCDate()
 
     // Get the first day of the month via date and math magic.
-    const firstDayOfCurrentMonth = new Date(Date.now() - (currentDayOfMonth - 1) * 24 * 60 * 60 * 1000)
+    const firstDayOfCurrentMonth = new Date(originDate - (currentDayOfMonth - 1) * 24 * 60 * 60 * 1000)
 
     // Get the day offset from the first day of the month.
     const dayOffset = firstDayOfCurrentMonth.getUTCDay() - 1
 
-    // Array containing days of every month. January has index 0.
-    const daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30]
-
     // Get amount of days this month
-    const daysThisMonth = daysPerMonth[currentDate.getUTCMonth()]
+    const daysThisMonth = daysPerMonth[originDate.getUTCMonth()]
 
     // Add day headers -- grabs day names from lang file.
     new Array(7)
@@ -127,6 +129,6 @@ export function createCalendarOnElement(calendarElement) {
     setLangDataToElement(
         "en_GB",
         document.querySelector("#month"),
-        lang => lang.months[currentDate.getUTCMonth()]
+        lang => lang.months[originDate.getUTCMonth()]
     )
 }
