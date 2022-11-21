@@ -30,7 +30,15 @@ document.querySelector("#next-month")
         "click",
         () => {
             monthOffset -= 1
-            createCalendarOnElement(calendarElement, new Date(Date.now() + monthOffset * 30 * 24 * 60 * 60 * 1000))
+            let   originDate  = new Date()
+            const originMonth = originDate.getMonth()
+            const originYear  = originDate.getFullYear()
+            originDate.setFullYear(
+                originYear + (originMonth + monthOffset) / 12,
+                (originMonth + monthOffset) % 12,
+                1
+            )
+            createCalendarOnElement(calendarElement, originDate)
         }
     )
 
@@ -39,7 +47,10 @@ document.querySelector("#prev-month")
         "click",
         () => {
             monthOffset += 1
-            createCalendarOnElement(calendarElement, new Date(Date.now() + monthOffset * 30 * 24 * 60 * 60 * 1000))
+            let originDate = new Date()
+            let originMonth = originDate.getMonth()
+            originDate.setMonth(originMonth + monthOffset)
+            createCalendarOnElement(calendarElement, originDate)
         }
     )
 

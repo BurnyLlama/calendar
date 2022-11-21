@@ -12,7 +12,7 @@ const daysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
  * @param {number} offset The number of days the first day of the month is from a monday.
  * @returns {Element}
  */
-function createCalendarDayElement(date, offset) {
+function createCalendarDayElement(date, month, year, offset) {
     // Create necessary elements.
     const day     = document.createElement("div")
     const dayDate = document.createElement("p")
@@ -40,6 +40,16 @@ function createCalendarDayElement(date, offset) {
     day.appendChild(dayName)
     day.appendChild(fullscreenToggleButton)
 
+    // Make sure today's day can be styled differently.
+    const today = new Date()
+    if (
+        date  === today.getUTCDate() +1 &&
+        month === today.getUTCMonth()   &&
+        year  === today.getUTCFullYear()
+    ) {
+        day.classList.add("today")
+    }
+
     // Fullscreen toggle on click.
     fullscreenToggleButton.addEventListener(
         "click",
@@ -66,12 +76,12 @@ function createCalendarDayElement(date, offset) {
 /**
  * Creates a calendar at an element.
  * @param {Element} calendarElement The element to make into a calendar.
+ * @param {Date} originDate The origin from which to create the calendar.
  */
 export function createCalendarOnElement(calendarElement, originDate) {
     // Make sure to empty the element, so that nothing
     // interferes with the calendar.
     calendarElement.replaceChildren("")
-        // .forEach(child => calendarElement.removeChild(child))
 
     // Get the current date and day of month.
     const currentDayOfMonth = originDate.getUTCDate()
@@ -116,12 +126,7 @@ export function createCalendarOnElement(calendarElement, originDate) {
     new Array(daysThisMonth)
         .fill(0)
         .forEach((_, calendarDayIndex) => {
-            const calendarDay = createCalendarDayElement(calendarDayIndex + 1, dayOffset)
-
-            // Make sure today's day can be styled differently.
-            if (currentDayOfMonth === calendarDayIndex + 1)
-                calendarDay.classList.add("today")
-
+            const calendarDay = createCalendarDayElement(calendarDayIndex + 1, originDate.getUTCMonth(), originDate.getUTCFullYear(), dayOffset)
             calendarElement.appendChild(calendarDay)
         })
 
