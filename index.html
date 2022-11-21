@@ -15,14 +15,17 @@
         <button id="settings-button">Settings</button>
         <button id="switch-layout-button">Switch layout</button>
     </div>
-    <div id="settings">
+    <div id="settings" class="hidden">
         <h1>Settings</h1>
         <h2>Colour</h2>
-        <label for="accent-color">Accent:</label>
-        <input type="color" name="accent-color" id="accent-color">
+        <form>
+            <label for="accent-color">Accent:</label>
+            <input type="color" id="accent-color">
 
-        <label for="red-color">Red:</label>
-        <input type="color" name="red-color" id="red-color">
+            <label for="red-color">Red:</label>
+            <input type="color" id="red-color">
+        </form>
+        <button id="close-settings">Close</button>
     </div>
 </body>
 </html>

@@ -177,12 +177,61 @@ button:hover {
     position: fixed;
     bottom: 5vmin;
     right: 5vmin;
-    box-shadow: var(--shadow);
-
     display: flex;
     flex-direction: column;
 }
 
 #action-buttons > * {
     margin: .5rem 0;
+    box-shadow: var(--shadow);
+}
+
+#settings {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+
+    width: min(90vw, 60ch);
+    height: 100vh;
+    padding: 2rem;
+
+    background-color: var(--surface);
+    border: var(--accent) 2px solid;
+    box-shadow: var(--shadow);
+
+    transition: left 0.3s;
+}
+
+#settings.hidden {
+    left: max(-90vw, -60ch);
+}
+
+#settings > h1 {
+    padding: .25rem .5rem;
+    border-bottom: 1px solid var(--text);
+}
+
+#settings > h2 {
+    margin: 1rem 0 .5rem 0;
+}
+
+#close-settings {
+    margin-top: auto;
+    background-color: var(--red);
+}
+
+form {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    place-items: center end;
+}
+
+form > * {
+    margin: .5rem 0;
+}
+
+form > *:nth-child(1n) {
+    margin-right: 1rem;
 }
