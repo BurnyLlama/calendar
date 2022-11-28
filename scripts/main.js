@@ -47,9 +47,14 @@ document.querySelector("#prev-month")
         "click",
         () => {
             monthOffset += 1
-            let originDate = new Date()
-            let originMonth = originDate.getMonth()
-            originDate.setMonth(originMonth + monthOffset)
+            let   originDate  = new Date()
+            const originMonth = originDate.getMonth()
+            const originYear  = originDate.getFullYear()
+            originDate.setFullYear(
+                originYear + (originMonth + monthOffset) / 12,
+                (originMonth + monthOffset) % 12,
+                1
+            )
             createCalendarOnElement(calendarElement, originDate)
         }
     )

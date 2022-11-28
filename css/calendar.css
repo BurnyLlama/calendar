@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vw;
 }
 
 button {
@@ -49,14 +50,28 @@ header {
     position: sticky;
 }
 
+header > h1 {
+    font-size: 1.5rem;
+}
+
 header > * {
     width: max-content;
-    padding: 1rem 3rem;
+    padding: .5rem 1.5rem;
     margin: .75rem;
     border: 1px solid var(--accent);
     background-color: var(--bg);
     border-radius: .5rem;
     box-shadow: var(--shadow);
+}
+
+@media screen and (min-width: 768px) {
+    header > h1 {
+        font-size: 2rem;
+    }
+
+    header > * {
+        padding: 1rem 3rem;
+    }
 }
 
 header > button {
@@ -68,8 +83,8 @@ header > button {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     flex-direction: column;
-    width: 70vw;
-    margin: 5vh 15vw;
+    width: min(120ch, 90%);
+    margin: 3vh auto 15vh auto;
 }
 
 #calendar > *:not(.calendar-offset) {
@@ -90,12 +105,14 @@ header > button {
 }
 
 .calendar-header {
+    font-size: .75rem;
     font-weight: bold;
     text-align: center;
 }
 
 .calendar-day {
     width: auto;
+    margin: 0 5rem;
     aspect-ratio: 4 / 3;
 
     display: grid;
@@ -111,13 +128,14 @@ header > button {
 }
 
 .calendar-day-date {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     grid-area: date;
 }
 
 .calendar-day-fullscreen-toggle {
     grid-area: btn;
-    padding: .25rem .5rem;
+    font-size: .75rem;
+    padding: .1rem .3rem;
     border: 0 none transparent;
     margin: 0 0 auto auto;
 }
@@ -162,6 +180,7 @@ header > button {
     position: fixed;
     bottom: 15vmin;
     right: 10vw;
+    z-index: 2;
 
     grid-template-areas: 'date btn '
                          'name name'
@@ -187,11 +206,11 @@ header > button {
     bottom: 5vmin;
     right: 5vmin;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
 }
 
 #action-buttons > * {
-    margin: .5rem 0;
+    margin: .5rem;
     box-shadow: var(--shadow);
 }
 
