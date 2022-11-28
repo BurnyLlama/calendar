@@ -101,11 +101,28 @@ export function createCalendarOnElement(calendarElement, originDate) {
         .forEach((_, dayIndex) => {
             const day = document.createElement("div")
             day.classList.add("calendar-header")
+
+            const dayNameLong  = document.createElement("p")
+            const dayNameShort = document.createElement("p")
+
+            dayNameLong.classList.add("day-name")
+            dayNameShort.classList.add("day-name-short")
+
+            day.appendChild(dayNameLong)
+            day.appendChild(dayNameShort)
+
             calendarElement.appendChild(day)
+
             setLangDataToElement(
                 "en_GB",
-                day,
+                dayNameLong,
                 lang => lang.days[dayIndex]
+            )
+
+            setLangDataToElement(
+                "en_GB",
+                dayNameShort,
+                lang => lang.daysShort[dayIndex]
             )
         })
 

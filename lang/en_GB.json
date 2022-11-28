@@ -8,6 +8,15 @@
         "Saturday",
         "Sunday"
     ],
+    "daysShort": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+    ],
     "months": [
         "January",
         "February",
